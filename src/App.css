@@ -1,2 +1,9 @@
 #grid {
+  display: grid;
+  grid-template-rows: 45% 10% 45%;
+  grid-template-columns: repeat(8, 12.5%);
+  grid-template-areas:
+    ". UBRound1 . UBRound2 . UBFinals . ."
+    ". . . . . . grandFinals winner"
+    "LBRound1 LBRound2 LBRound3 LBRound4 LBRound5 LBFinals . .";
 }
