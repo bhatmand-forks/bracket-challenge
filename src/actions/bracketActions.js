@@ -12,8 +12,15 @@ export const receiveAllTeams = (teams) => ({
 
 export const requestAllTeams = async (dispatch) => {
   try {
-      const {data : teams} = await openDotaAPI.fetchAllTeams()
-      dispatch(receiveAllTeams(teams.slice(0, 16)));
+      const {data : teams} = await openDotaAPI.fetchAllTeams();
+      
+      let top16Teams = await Promise.all(teams.slice(0, 16).map(async team => {
+        let {data: players} = await openDotaAPI.fetchAllPlayers(team.team_id);
+        team.players = players.filter((player => player.is_current_team_member)).map((player) => player.name);
+        return team;
+      }))
+      
+      dispatch(receiveAllTeams(top16Teams));
   }
   catch(e) {
       console.log(e);

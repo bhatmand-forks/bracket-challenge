@@ -31,10 +31,18 @@ export default function Round({ teams, round, dispatchToBracket }) {
   return <Wrapper round={round}>{matchesJSX}</Wrapper>;
 }
 
+const JUSTIFY_CONTENT_KEYMAP = {
+  ubRound2: 'flex-end',
+  lbRound2: 'flex-start',
+  ubFinals: 'flex-end',
+  lbFinals: 'flex-start',
+};
+
 const Wrapper = styled.div`
   grid-area: ${props => props.round};
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: ${props =>
+    JUSTIFY_CONTENT_KEYMAP[props.round] ? JUSTIFY_CONTENT_KEYMAP[props.round] : 'center'};
   align-items: center;
 `;

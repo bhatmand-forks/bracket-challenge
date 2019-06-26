@@ -8,11 +8,6 @@ export default function TournamentBracket() {
 
   useEffect(() => {
     requestAllTeams(dispatchToBracket);
-    // const fetchAllTeams = async () => {
-    //   let { data: teams } = await axios('https://api.opendota.com/api/teams');
-    //   dispatchToBracket(receiveAllTeams(teams.slice(0, 16)));
-    // };
-    // fetchAllTeams();
   }, []);
 
   let rounds = [

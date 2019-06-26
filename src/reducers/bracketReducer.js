@@ -1,12 +1,13 @@
 import { actionTypes } from '../actions/bracketActions';
 
-const createTeam = (name, rating, logoUrl) => ({
+const createTeam = (name, rating, players, logoUrl) => ({
   name: name === '' ? 'OpTic Gaming' : name.trim(),
   elo: rating,
+  players,
   logoUrl,
 });
 
-let emptyTeam = createTeam('-', 0, '');
+let emptyTeam = createTeam('-', 0, [], '');
 
 export const initialState = {
   ubRound1: [],
@@ -32,9 +33,9 @@ export const bracketReducer = (state, action) => {
         start++, end--, isUpperBracket = !isUpperBracket
       ) {
         let team1 = action.teams[start];
-        team1 = createTeam(team1.name, team1.rating, team1.logo_url);
+        team1 = createTeam(team1.name, team1.rating, team1.players, team1.logo_url);
         let team2 = action.teams[end];
-        team2 = createTeam(team2.name, team2.rating, team2.logo_url);
+        team2 = createTeam(team2.name, team2.rating, team2.players, team2.logo_url);
   
         if (isUpperBracket) {
           ubRound1.push(team1, team2);

@@ -7,8 +7,6 @@ export default function Match({ teams, round, index, dispatchToBracket }) {
   const [winningTeam, setWinningTeam] = useState({});
 
   const handlePlayMatch = e => {
-    e.stopPropagation();
-    console.log(teams);
     if (teams[0].name !== '-' && teams[1].name !== '-')
       dispatchToBracket(playMatch(round, winningTeam, index));
   };
