@@ -5,5 +5,5 @@
   grid-template-areas:
     'ubRound1 ubRound2 ubFinals . .'
     '. . . grandFinals winner'
-    'lbRound1 lbRound2 lbFinals . .';
+    'lbRound1 lbRound2 lbFinals . menu';
 }

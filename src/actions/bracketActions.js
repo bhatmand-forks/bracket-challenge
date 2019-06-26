@@ -2,7 +2,9 @@ import * as openDotaAPI from '../api/openDotaAPI';
 
 export const actionTypes = {
   RECEIVE_ALL_TEAMS: 'RECEIVE_ALL_TEAMS',
-  PLAY_MATCH: 'PLAY_MATCH'
+  PLAY_MATCH: 'PLAY_MATCH',
+  AUTO_PLAY_TOURNAMENT: 'AUTO_PLAY_TOURNAMENT',
+  RESET_TOURNAMENT: 'RESET_TOURNAMENT'
 }
 
 export const receiveAllTeams = (teams) => ({
@@ -27,9 +29,19 @@ export const requestAllTeams = async (dispatch) => {
   }
 }
 
-export const playMatch = (round, team, index) => ({
+export const playMatch = (round, teams, index) => ({
   type: actionTypes.PLAY_MATCH,
   round,
-  team,
+  teams,
   index
+})
+
+export const autoPlayTournament = (ubRound1, lbRound1) => ({
+  type: actionTypes.AUTO_PLAY_TOURNAMENT,
+  ubRound1,
+  lbRound1
+})
+
+export const resetTournament = () => ({
+  type: actionTypes.RESET_TOURNAMENT
 })

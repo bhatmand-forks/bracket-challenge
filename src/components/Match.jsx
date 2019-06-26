@@ -4,26 +4,10 @@ import { playMatch } from '../actions/bracketActions';
 import Team from './Team';
 
 export default function Match({ teams, round, index, dispatchToBracket }) {
-  const [winningTeam, setWinningTeam] = useState({});
-
   const handlePlayMatch = e => {
     if (teams[0].name !== '-' && teams[1].name !== '-')
-      dispatchToBracket(playMatch(round, winningTeam, index));
+      dispatchToBracket(playMatch(round, teams, index));
   };
-
-  const determineWinner = teams => {
-    if (teams.length === 1) {
-      return teams[0];
-    } else {
-      let team1Score = Math.random() * 300 + teams[0].elo;
-      let team2Score = Math.random() * 300 + teams[1].elo;
-      return team1Score > team2Score ? teams[0] : teams[1];
-    }
-  };
-
-  useEffect(() => {
-    setWinningTeam(determineWinner(teams));
-  }, [teams]);
 
   const teamsJSX = teams.map((team, i) => (
     <Team key={`${team.name}-${i}`} team={team} round={round} />

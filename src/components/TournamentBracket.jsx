@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
+import styled from 'styled-components';
 import { initialState, bracketReducer } from '../reducers/bracketReducer';
-import { requestAllTeams } from '../actions/bracketActions';
+import { requestAllTeams, autoPlayTournament, resetTournament } from '../actions/bracketActions';
 import Round from './Round';
 
 export default function TournamentBracket() {
@@ -9,6 +10,14 @@ export default function TournamentBracket() {
   useEffect(() => {
     requestAllTeams(dispatchToBracket);
   }, []);
+
+  const handlePlay = () => {
+    dispatchToBracket(autoPlayTournament(bracket.ubRound1, bracket.lbRound1));
+  };
+
+  const handleReset = () => {
+    dispatchToBracket(resetTournament());
+  };
 
   let rounds = [
     'ubRound1',
@@ -32,5 +41,34 @@ export default function TournamentBracket() {
     );
   });
 
-  return <>{rounds}</>;
+  return (
+    <>
+      {rounds}
+      <StyledMenu>
+        <StyledButton onClick={handlePlay}>AUTO PLAY</StyledButton>
+        <StyledButton onClick={handleReset}>RESET</StyledButton>
+      </StyledMenu>
+    </>
+  );
 }
+
+const StyledMenu = styled.div`
+  grid-area: menu;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 12em;
+`;
+
+const StyledButton = styled.button`
+  font-family: 'Permanent Marker', cursive;
+  background-color: #660000;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+`;
