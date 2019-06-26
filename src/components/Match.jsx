@@ -25,7 +25,9 @@ export default function Match({ teams, round, index, dispatchToBracket }) {
     setWinningTeam(determineWinner(teams));
   }, [teams]);
 
-  const teamsJSX = teams.map((team, i) => <Team key={`${team.name}-${i}`} team={team} />);
+  const teamsJSX = teams.map((team, i) => (
+    <Team key={`${team.name}-${i}`} team={team} round={round} />
+  ));
 
   return (
     <Wrapper
